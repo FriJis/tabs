@@ -14,4 +14,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+header {
+    box-shadow: inset 0px -7px 5px -8px black;
+}
 </style>

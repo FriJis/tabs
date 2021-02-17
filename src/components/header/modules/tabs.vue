@@ -1,23 +1,24 @@
 <template>
     <div class="tabs">
         <div class="tabs__inner">
-            <div v-for="(t, i) in tabs" :key="i">
+            <template v-for="(t, i) in tabs">
                 <router-link
+                    :key="i"
                     :to="{ name: t.name, params: { id: t.id } }"
                     class="tab"
                 >
                     <div class="title">{{ t.name }}</div>
                     <div class="close btn bg-grey" @click="deleteTab(t.id)">
-                        X
+                        <i class="fas fa-times"></i>
                     </div>
                 </router-link>
-            </div>
+            </template>
         </div>
         <div class="btn add bg-grey">
             +
             <div class="menu">
                 <div
-                    class="option"
+                    class="option btn bg-grey"
                     v-for="(r, i) in options"
                     :key="i"
                     @click="createNewTab(r.name)"
@@ -75,30 +76,62 @@ export default {
             flex: 1;
             max-width: 200px;
             display: flex;
-            line-height: $close-size;
-            padding: 5px;
+            line-height: var(--tabs-height);
             border-radius: $border-radius $border-radius 0 0;
+            color: var(--color);
+            text-decoration: none;
+            align-items: center;
+            padding: 0 10px;
+            overflow: hidden;
+
             .title {
-                width: calc(100% - #{$close-size});
-                padding: 0 10px;
+                width: calc(100% - var(--tabs-close-btn-size));
                 box-sizing: border-box;
                 overflow: hidden;
+                padding-right: 10px;
             }
             .close {
-                width: $close-size;
+                width: var(--tabs-close-btn-size);
+                line-height: var(--tabs-close-btn-size);
+                i {
+                    line-height: var(--tabs-close-btn-size);
+                    display: block;
+                }
                 text-align: center;
-                border-radius: $close-size;
+                border-radius: var(--tabs-close-btn-size);
             }
 
             &.router-link-active {
+                box-shadow: 0px 12px 9px -3px black;
                 background: var(--bg-color);
             }
         }
     }
     .add {
-        width: $new_tab;
-        line-height: $new_tab;
+        width: var(--tabs-height);
+        line-height: var(--tabs-height);
         text-align: center;
+        position: relative;
+        i {
+            line-height: var(--tabs-height);
+        }
+        &:hover .menu {
+            visibility: visible;
+            box-shadow: 0px 4px 5px 4px rgba(0, 0, 0, 0.27);
+            border-radius: 0 0 0 10px;
+            overflow: hidden;
+        }
+        .menu {
+            background: var(--bg-color);
+            position: absolute;
+            top: 100%;
+            right: 0px;
+            visibility: hidden;
+            z-index: 3;
+            .option {
+                padding: 0 20px;
+            }
+        }
     }
 }
 </style>
