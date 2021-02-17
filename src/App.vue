@@ -6,7 +6,7 @@
             <nav></nav>
             <section>
                 <keep-alive>
-                    <router-view :key="$route.params.id" />
+                    <router-view :key="$route.path" />
                 </keep-alive>
             </section>
         </main>

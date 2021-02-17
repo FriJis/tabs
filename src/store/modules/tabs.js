@@ -21,7 +21,7 @@ export default {
         }
     },
     state: {
-        _id: 0,
+        _id: 1,
         tabs: []
     },
     getters: {

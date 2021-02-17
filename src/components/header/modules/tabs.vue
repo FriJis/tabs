@@ -1,14 +1,17 @@
 <template>
     <div class="tabs">
         <div class="tabs__inner">
-            <template v-for="(t, i) in tabs">
+            <template v-for="(t) in tabs">
                 <router-link
-                    :key="i"
+                    :key="t.id"
                     :to="{ name: t.name, params: { id: t.id } }"
                     class="tab"
                 >
                     <div class="title">{{ t.name }}</div>
-                    <div class="close btn bg-grey" @click="deleteTab(t.id)">
+                    <div
+                        class="close btn bg-grey"
+                        @click.prevent="deleteTab(t.id)"
+                    >
                         <i class="fas fa-times"></i>
                     </div>
                 </router-link>
@@ -48,16 +51,14 @@ export default {
     },
     methods: {
         initOption() {
-            const {
-                options: { routes },
-            } = this.$router;
-            this.options = routes;
+            this.options = this.$moduleRoutes;
         },
         createNewTab(name) {
             this.$store.dispatch("tabs/add", { name });
         },
         deleteTab(id) {
             this.$store.dispatch("tabs/delete", id);
+            this.$router.push("/");
         },
     },
 };
@@ -71,7 +72,7 @@ export default {
     display: flex;
     .tabs__inner {
         display: flex;
-        width: calc(100% - #{$new_tab});
+        width: calc(100% - var(--tabs-height));
         .tab {
             flex: 1;
             max-width: 200px;

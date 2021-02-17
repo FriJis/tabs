@@ -11,7 +11,10 @@ const routes = reqCtx.keys().reduce((acc, el) => {
   acc.push({
     name: matchName(el),
     path: `/${matchName(el)}/:id`,
-    component: async () => await reqCtx(el)
+    component: async () => await reqCtx(el),
+    meta: {
+      type: 'module'
+    }
   })
   return acc
 }, [])
@@ -24,7 +27,10 @@ const router = new VueRouter({
     {
       path: '/*',
       name: 'index',
-      component: index
+      component: index,
+      meta: {
+        type: 'system'
+      }
     }
   ]
 });
