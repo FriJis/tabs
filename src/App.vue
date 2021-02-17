@@ -1,27 +1,24 @@
 <template>
-    <div id="app">
-        <v-header></v-header>
+  <div id="app">
+    <v-header></v-header>
 
-        <main>
-            <nav></nav>
-            <section>
-                <keep-alive>
-                    <router-view :key="$route.path" />
-                </keep-alive>
-            </section>
-        </main>
-    </div>
+    <main>
+        <keep-alive>
+          <router-view :key="$route.path" />
+        </keep-alive>
+    </main>
+  </div>
 </template>
 
 <script>
 import header from "./components/header";
 export default {
-    components: {
-        "v-header": header,
-    },
-    mounted() {
-        this.$router.push('/')
-    },
-    methods: {},
+  components: {
+    "v-header": header
+  },
+  mounted() {
+    this.$router.push("/");
+  },
+  methods: {}
 };
 </script>

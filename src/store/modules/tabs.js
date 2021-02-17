@@ -1,23 +1,25 @@
 export default {
     namespaced: true,
     actions: {
-        add({commit}, {name}){
-            commit('create', {name})
+        add({ commit }, { name }) {
+            return commit("create", { name });
         },
-        delete({commit}, id) {
-            commit('delete', id)
+        delete({ commit }, id) {
+            commit("delete", id);
         }
     },
     mutations: {
-        create(store, {name}) {
-            store.tabs.push({
+        create(store, { name }) {
+            const d = {
                 name,
                 id: store._id
-            })
-            store._id += 1
+            }
+            store.tabs.push(d);
+            store._id += 1;
+            return d
         },
         delete(store, id) {
-            store.tabs = store.tabs.filter(e => e.id !== id)
+            store.tabs = store.tabs.filter(e => e.id !== id);
         }
     },
     state: {
@@ -25,8 +27,8 @@ export default {
         tabs: []
     },
     getters: {
-        tabs({tabs}) {
-            return tabs
+        tabs({ tabs }) {
+            return tabs;
         }
     }
-}
+};

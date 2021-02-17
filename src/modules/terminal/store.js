@@ -1,8 +1,8 @@
 export default {
-    namespaced: true,
-    actions: {
-        log() {
-            console.log('sadjkfghsd');
-        }
+  namespaced: true,
+  actions: {
+    log() {
+      console.log("sadjkfghsd");
     }
-}
+  }
+};

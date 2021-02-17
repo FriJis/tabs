@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import index from '../views/index'
+import index from "../views/index";
 
-const reqCtx = require.context('../modules/', true, /index.vue/)
-const matchName = (str) => str.replace(/.\//, '').replace(/\/(index.vue)/, '');
+const reqCtx = require.context("../modules/", true, /index.vue/);
+const matchName = str => str.replace(/.\//, "").replace(/\/(index.vue)/, "");
 Vue.use(VueRouter);
 
 const routes = reqCtx.keys().reduce((acc, el) => {
@@ -13,11 +13,11 @@ const routes = reqCtx.keys().reduce((acc, el) => {
     path: `/${matchName(el)}/:id`,
     component: async () => await reqCtx(el),
     meta: {
-      type: 'module'
+      type: "module"
     }
-  })
-  return acc
-}, [])
+  });
+  return acc;
+}, []);
 
 const router = new VueRouter({
   mode: "history",
@@ -25,11 +25,11 @@ const router = new VueRouter({
   routes: [
     ...routes,
     {
-      path: '/*',
-      name: 'index',
+      path: "/*",
+      name: "index",
       component: index,
       meta: {
-        type: 'system'
+        type: "system"
       }
     }
   ]
